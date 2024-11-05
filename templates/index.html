@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Steganography Tool</h2>
+
+        <!-- Display Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="alert alert-warning">
+              {% for message in messages %}
+                <p>{{ message }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <div class="row">
+            <!-- Encryption Form -->
+            <div class="col-md-6">
+                <h3>Encrypt</h3>
+                <form action="/encrypt" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label>Cover Image</label>
+                        <input type="file" name="cover_file" required class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label>Text to Hide</label>
+                        <textarea name="text_to_hide" required class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label>Enter Password (default is 123)</label>
+                        <input type="text" name="password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Encrypt</button>
+                </form>
+            </div>
+
+            <!-- Decryption Form -->
+            <div class="col-md-6">
+                <h3>Decrypt</h3>
+                <form action="/decrypt" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label>Encrypted File</label>
+                        <input type="file" name="encrypted_file" required class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label>Password (default is 123 , if not password protected)</label>
+                        <input type="text" name="password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Decrypt</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center mt-4">
+            <p>Developed by Samarth</p>
+        </footer>
+    </div>
+</body>
+</html>
